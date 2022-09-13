@@ -6,19 +6,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Lora',serif;
+    font-family: 'Ms Madi';
     color: #444;
 }
 
 .headertitlesm{
     position: absolute;
     top: 18%;
-    font-size: 20px;
+    font-size: 30px;
 }
 .headertitlelg{
     position: absolute;
     top: 20%;
     font-size: 100px;
+    font-family: ;
 }
 .headerimg{
     width:100%;
