@@ -23,9 +23,15 @@ export default function Register() {
       Email: State.Email,
       Password : State.Password
     }
-    axios.post("http://localhost:4000/register",{data},
-    ).then(res => {
-      console.log('response')}).catch((error) => console.log('error'))
+    axios.post("http://localhost:4000/register",data,{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    ).then(() => {
+      alert('registered')
+    
+     }).catch((error) => console.log(error.code))
     }
     return (
         <div className="register">

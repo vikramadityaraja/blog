@@ -25,4 +25,24 @@ router.get('/register',(req,res) => {
     res.send('get request success yahoo!')
 })
 
+router.post('/login', async (req,res) => {
+    const {Email, Password} = req.body
+    const user = register.findOne( {email : Email}, (err, user) => {
+        
+    })
+    console.log(user)
+    if(user == null) {
+        return res.status(400).send(`can't find user`)
+    }
+    try{
+        if(await bcrypt.compare(req.body.password, user.password )){
+            res.send('success')
+        } else{
+            res.send('not allowed')
+        }
+    } catch {
+        res.send('not working')
+    }
+})
+
 module.exports = router
