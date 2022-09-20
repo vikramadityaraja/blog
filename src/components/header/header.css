@@ -1,5 +1,5 @@
 .header{
-    margin-top: 60px;   
+    margin-top: 40px;   
 }
 
 .headertitles{
@@ -7,19 +7,19 @@
     flex-direction: column;
     align-items: center;
     font-family: 'Ms Madi';
-    color: #444;
+    color: rgb(35, 32, 33);
 }
 
 .headertitlesm{
     position: absolute;
-    top: 18%;
+    /*top: 18%;*/
     font-size: 30px;
 }
 .headertitlelg{
     position: absolute;
     top: 20%;
     font-size: 100px;
-    font-family: ;
+    
 }
 .headerimg{
     width:100%;

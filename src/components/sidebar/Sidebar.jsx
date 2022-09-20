@@ -6,7 +6,7 @@ function Sidebar() {
         <div className='sidebaritem'>
             <span className='sidebartitle'>ABOUT ME</span>
             
-            <img src='./pics/9.jpg' alt='' className='sidebarimg'/>
+            <img src='./pics/3.jpeg' alt='' className='sidebarimg'/>
             <p> Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
                 amet ex esse.Sunt eu ut nostrud id quis proident.
             </p>

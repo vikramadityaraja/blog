@@ -1,21 +1,70 @@
 import "./register.css"
 import { Link } from "react-router-dom"
+import { useState } from "react"
+import axios from "axios"
 
 export default function Register() {
+  const [ State, setState] = useState({
+    Username: '',
+    Email: '',
+    Password : ''
+  })
+  const onchange = (e) => {
+    const value = e.target.value;
+    setState({
+      ...State, [e.target.name] : value
+    }
+  )}
+
+  const postcall = event => {
+    event.preventDefault();
+    const data = {
+      Username: State.Username,
+      Email: State.Email,
+      Password : State.Password
+    }
+    axios.post("http://localhost:4000/register",{data},
+    ).then(res => {
+      console.log('response')}).catch((error) => console.log('error'))
+    }
     return (
         <div className="register">
-      <span className="registerTitle">Register</span>
-      <form className="registerForm">
-        <label>Username</label>
-        <input className="registerInput" type="text" placeholder="Enter your username..." />
-        <label>Email</label>
-        <input className="registerInput" type="text" placeholder="Enter your email..." />
-        <label>Password</label>
-        <input className="registerInput" type="password" placeholder="Enter your password..." />
-        <button className="registerButton">Register</button>
-      </form>
-        <button className="registerLoginButton">
-            <Link className="link" to='/login'>Login</Link></button>
+        <span className="registerTitle">Register</span>
+        <form className="registerForm" onSubmit={postcall}>
+
+          <label>Username</label>
+          <input 
+            className="registerInput" 
+            type="text" 
+            placeholder="Enter your username..."
+            onChange={onchange}
+            value = {State.Username}
+            name = 'Username' />
+
+          <label>Email</label>
+          <input 
+            className="registerInput" 
+            type="text" 
+            placeholder="Enter your email..." 
+            onChange={onchange}
+            value = {State.Email}
+            name = 'Email'/>
+
+          <label>Password</label>
+          <input 
+            className="registerInput" 
+            type="password" 
+            placeholder="Enter your password..."
+            onChange={onchange}
+            value = {State.Password}
+            name = 'Password' />
+
+          <button className="registerButton" type="submit">Register</button>
+        </form>
+
+          <button className="registerLoginButton">
+              <Link className="link" to='/login'>Login</Link>
+          </button>
     </div>
     )
 }

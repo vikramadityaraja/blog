@@ -14,10 +14,10 @@ function Header() {
   return (
     <div className='header'>
         <div className='headertitles'>
-            <span className='headertitlesm'>Siddu & Lalitha's</span>
-            <span className='headertitlelg'>Wedding</span>
+            <span className='headertitlesm'>My</span>
+            <span className='headertitlelg'>Blog</span>
         </div>
-        <img src='./pics/coverpic.JPG'
+        <img src='./pics/6.jpeg'
         alt='headerimg' className='headerimg'/>
     </div>
   )

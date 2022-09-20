@@ -1,13 +1,18 @@
 import "./settings.css";
 import Sidebar from "../../components/sidebar/Sidebar";
 
-export default function Settings() {
+export default function Settings({setUser}) {
+  
+  const logout = () => setUser('')
   return (
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsTitleUpdate">Update Your Account</span>
-          <span className="settingsTitleDelete">Delete Account</span>
+          <div>
+            <span className="settingsTitleDelete">Delete Account</span>   
+            <span className="settingsTitleDelete space" onClick={logout}>Logout</span>   
+          </div>
         </div>
         <form className="settingsForm">
           <label>Profile Picture</label>
