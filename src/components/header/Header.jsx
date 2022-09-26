@@ -17,7 +17,7 @@ function Header() {
             <span className='headertitlesm'>My</span>
             <span className='headertitlelg'>Blog</span>
         </div>
-        <img src='./pics/6.jpeg'
+        <img src='./pics/1.jpeg'
         alt='headerimg' className='headerimg'/>
     </div>
   )

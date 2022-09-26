@@ -1,23 +1,41 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const router = express.Router()
 const bcrypt = require("bcrypt")
-const templatecopy = require('./models')
 
-router.post('/register', async (req,res) => {
-//    const saltRounds = 10
-//    const salt = await bcrypt.genSalt(saltRounds)
-//    const epassword = await bcrypt.hash(req.body.Password,salt)
-    const newuserdata = new templatecopy({
+const register = require('./models')
+
+/*const mware = (req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+    );
+    next();
+  };*/
+
+router.post('/register',async  (req,res) => {
+
+    const saltRounds = 10
+    const salt = await bcrypt.genSalt(saltRounds)
+    const epassword = await bcrypt.hash(req.body.Password,salt)
+
+    const newuserdata = new register({
         Username : req.body.Username,
         Email : req.body.Email,
-        Password : req.body.Password
+        Password : epassword
     })
     newuserdata.save()
-    .then(data => {
-        res.json(data)
+    .then(res => {
+        console.log(res)
+        
     })
     .catch(error => {
         res.json(error)
+        
     })
 }),
 
@@ -26,23 +44,37 @@ router.get('/register',(req,res) => {
 })
 
 router.post('/login', async (req,res) => {
-    const {Email, Password} = req.body
-    const user = register.findOne( {email : Email}, (err, user) => {
+    //const {Username, Password} = req.body
+    const user = register.find( user => user.Username == req.body?.Username)
+
+    if(user == null || undefined) {
+        //return res.status(400).send('cant find user')
+        return res.send('cant find user')
         
-    })
-    console.log(user)
-    if(user == null) {
-        return res.status(400).send(`can't find user`)
     }
     try{
-        if(await bcrypt.compare(req.body.password, user.password )){
-            res.send('success')
+        if(await bcrypt.compare(req.body.Password, user?.Password )){
+           //return res.send('success')
+           const accessToken = generateAccessToken(user)
+           return res.json({accessToken: accessToken})
+       
+           function generateAccessToken(user) {
+               return jwt.sign({user: user?.Username, password : user?.Password} ,process.env.ACCESS_TOKEN_SECRET)
+           }
         } else{
             res.send('not allowed')
         }
     } catch {
         res.send('not working')
     }
+ //, (err, user) => {
+        //if(err) return res.json(err)
+  //      res.json(user)
+  //  })
+  //  console.log(user)
+
+
+    
 })
 
 module.exports = router

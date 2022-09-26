@@ -6,17 +6,17 @@ POST http://localhost:4000/register
 Content-Type: application/json
 
 {
-    "Username" : "user",
-    "Email" : "user@gmail.com",
+    "Username" : "snsd2",
+    "Email" : "snsd2@gmail.com",
     "Password": "password"
 }
 
 ###
 
-POST http://localhost:3000/post/login
+POST http://localhost:4000/login
 Content-Type: application/json
 
 {
- "user" : "vicky",
- "password": "password"
+ "Username" : "",
+ "Password": "password"
 }

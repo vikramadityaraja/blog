@@ -1,9 +1,13 @@
 import "./register.css"
-import { Link } from "react-router-dom"
+
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 
-export default function Register() {
+const Register = () => {
+
+  const Navigate = useNavigate()
+
   const [ State, setState] = useState({
     Username: '',
     Email: '',
@@ -30,7 +34,7 @@ export default function Register() {
     }
     ).then(() => {
       alert('registered')
-    
+      Navigate('/login')
      }).catch((error) => console.log(error.code))
     }
     return (
@@ -74,3 +78,5 @@ export default function Register() {
     </div>
     )
 }
+
+export default Register
